@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: MF AI
-Plugin URI: 
-Description:
-Version: 1.1.5
+Plugin URI: https://github.com/frostkom/mf_ai
+Description: Integrate an AI search on your site or get help from AI to craft a titel, exerpt and content for each page
+Version: 1.1.6
 Licence: GPLv2 or later
 Author: Martin Fors
 Author URI: https://martinfors.se
