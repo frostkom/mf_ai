@@ -28,11 +28,8 @@ class mf_ai
 					."<button type='button' name='btnAIRun'>
 						<svg width='20' height='20' fill='currentColor'><path d='M2 10l16-6-6 16-2-7z'/></svg>
 					</button>
-				</div>"
-				/*."<div".get_form_button_classes().">"
-					.show_button(array('type' => 'button', 'name' => 'btnAIRun', 'text' => __("Run", 'lang_ai'))) //, 'class' => 'button-secondary'
-				."</div>"*/
-			."</form>
+				</div>
+			</form>
 		</div>";
 
 		return $out;
@@ -373,7 +370,7 @@ class mf_ai
 					$json_output['success'] = true;
 					$json_output['html'] = nl2br($arr_json['choices'][0]['message']['content']);
 
-					//{"id":"cfc1e8d6a6cc43698ea8b13d7da5d68a","object":"chat.completion","created":1747992080,"model":"mistral-small-latest","choices":[{"index":0,"message":{"role":"assistant","tool_calls":null,"content":""},"finish_reason":"stop","logprobs":null}],"usage":{"prompt_tokens":10,"total_tokens":24,"completion_tokens":14}}
+					//{"id":"[id]","object":"chat.completion","created":1747992080,"model":"mistral-small-latest","choices":[{"index":0,"message":{"role":"assistant","tool_calls":null,"content":""},"finish_reason":"stop","logprobs":null}],"usage":{"prompt_tokens":10,"total_tokens":24,"completion_tokens":14}}
 
 					$post_data = array(
 						'post_type' => $this->post_type,

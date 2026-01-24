@@ -1,7 +1,5 @@
 jQuery(function($)
 {
-	console.log("Init");
-
 	var dom_container = $(".mf_ai_page_form");
 
 	function write_text(dom_target, text, index)
