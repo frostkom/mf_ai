@@ -1,0 +1,286 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-24 12:57+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Martin Fors\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: sv_SE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: esc_html__;esc_html_e;esc_attr__;esc_attr_e;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../include/classes.php:27
+#: ../include/classes.php:155
+msgid "Ask me anything"
+msgstr "Fråga mig vad som helst"
+
+#: ../include/classes.php:49
+#: ../include/classes.php:128
+msgid "AI"
+msgstr ""
+
+#: ../include/classes.php:50
+msgid "Display AI"
+msgstr "Visa AI"
+
+#: ../include/classes.php:60
+#: ../include/classes.php:62
+msgid "AI Queries"
+msgstr "AI-frågor"
+
+#: ../include/classes.php:61
+msgid "AI Query"
+msgstr "AI-fråga"
+
+#: ../include/classes.php:63
+msgid "List"
+msgstr "Lista"
+
+#: ../include/classes.php:64
+msgid "Edit"
+msgstr "Redigera"
+
+#: ../include/classes.php:65
+msgid "View"
+msgstr "Visa"
+
+#: ../include/classes.php:66
+msgid "Add New"
+msgstr "Lägg till ny"
+
+#: ../include/classes.php:93
+msgid "API Key"
+msgstr "API-nyckel"
+
+#: ../include/classes.php:156
+msgid "Run"
+msgstr "Kör"
+
+#: ../include/classes.php:177
+msgid "I can help you create content for this page. By clicking the button below I will give you suggestions from the information you have already entered as title, content etc. Then you can decide if you want to use my suggestion."
+msgstr "Jag kan hjälpa dig att skapa innehåll till den här sidan. Genom att klicka på knappen nedan ger jag dig förslag utifrån den information du redan har angett, så som titel, innehåll osv. Sen kan du bestämma om du vill använda mitt förslag."
+
+#: ../include/classes.php:179
+msgid "Get Suggestion Now"
+msgstr "Hämta förslag nu"
+
+#: ../include/classes.php:193
+msgid "Get AI Help"
+msgstr "Ta hjälp av AI"
+
+#: ../include/classes.php:402
+msgid "There were no API keys"
+msgstr "Det finns inga API-nycklar"
+
+#: ../include/classes.php:424
+msgid "Log in to display this"
+msgstr "Logga in för att visa detta"
+
+#: ../include/classes.php:453
+#, php-format
+msgid "Can you give me examples for page title, excerpt and content? The page currently have the title '%s', excerpt '%s' and content '%s'."
+msgstr "Kan du ge mig exempel på sidtitel, utdrag och innehåll? Sidan har för närvarande titeln '%s', utdraget '%s' och innehållet '%s'."
+
+#~ msgid "now"
+#~ msgstr "nu"
+
+#~ msgid "years"
+#~ msgstr "år"
+
+#~ msgid "year"
+#~ msgstr "år"
+
+#~ msgid "ago"
+#~ msgstr "sen"
+
+#~ msgid "days"
+#~ msgstr "dagar"
+
+#~ msgid "day"
+#~ msgstr "dag"
+
+#~ msgid "hours"
+#~ msgstr "timmar"
+
+#~ msgid "hour"
+#~ msgstr "timme"
+
+#~ msgid "minutes"
+#~ msgstr "minuter"
+
+#~ msgid "minute"
+#~ msgstr "minut"
+
+#~ msgid "Are you sure you want to update the time for [listName]?"
+#~ msgstr "Är du säker på att du vill uppdatera tiden för [listName]?"
+
+#~ msgid "Update"
+#~ msgstr "Uppdatera"
+
+#~ msgid "Cancel"
+#~ msgstr "Avbryt"
+
+#~ msgid "Are you sure you want to delete [listName]?"
+#~ msgstr "Är du säker på att du vill radera [listName]?"
+
+#~ msgid "Delete"
+#~ msgstr "Radera"
+
+#~ msgid "between"
+#~ msgstr "mellan"
+
+#~ msgid "Old"
+#~ msgstr "Gammal"
+
+#~ msgid "Author"
+#~ msgstr "Författare"
+
+#~ msgid "Date"
+#~ msgstr "Datum"
+
+#~ msgid "I could not find anything in the list"
+#~ msgstr "Jag kunde inte hitta något i listan"
+
+#~ msgid "You have to log in to access this widget"
+#~ msgstr "Du behöver logga in för att kunna komma åt denna widget"
+
+#~ msgid "Heading"
+#~ msgstr "Rubrik"
+
+#~ msgid "Log"
+#~ msgstr "Logg"
+
+#~ msgid "Activate"
+#~ msgstr "Aktivera"
+
+#~ msgid "Debug %s"
+#~ msgstr "Felsök %s"
+
+#~ msgid "Debug Database Queries"
+#~ msgstr "Felsök databasfrågor"
+
+#~ msgid "Query Time Limit"
+#~ msgstr "Gränsvärde för databasfrågor"
+
+#~ msgid "Page Time Limit"
+#~ msgstr "Gränsvärde för sidvisning"
+
+#~ msgid "Slow Part Percent Limit"
+#~ msgstr "Gränsvärde för långsam del"
+
+#~ msgid "Custom Debug File"
+#~ msgstr "Egen debug-fil"
+
+#~ msgid "Log and Debug"
+#~ msgstr "Log och debug"
+
+#~ msgid "Add this to the end of %s"
+#~ msgstr "Lägg till detta i slutet av %s"
+
+#~ msgid ""
+#~ "%s is not writable. Please, make sure that the folder can be written to "
+#~ "so that Wordpress can log errors"
+#~ msgstr ""
+#~ "%s är inte skrivbar. Se till så att mappen är skrivbar så att Wordpress "
+#~ "kan logga fel"
+
+#~ msgid "Change settings in %s"
+#~ msgstr "Ändra inställningar i %s"
+
+#~ msgid ""
+#~ "Change %s to %s in %s or else you have to handle the content in %s so "
+#~ "that it does not grow in size"
+#~ msgstr ""
+#~ "Ändra %s till %s i %s, eller så måste du hantera innehållet i %s för att "
+#~ "det inte ska växa i storlek"
+
+#~ msgid ""
+#~ "This will hurt performance on the frontend so use this for debugging only "
+#~ "and then turn off"
+#~ msgstr ""
+#~ "Detta påverkar prestandan negativt på webbsidan så använd detta endast "
+#~ "för debugging och stäng av det efteråt"
+
+#~ msgid "Remove %s from %s"
+#~ msgstr "Ta bort %s från %s"
+
+#~ msgid "The file is not readable"
+#~ msgstr "Filen är inte läsbar"
+
+#~ msgid "The file does not exist"
+#~ msgstr "Filen finns inte"
+
+#~ msgid "New Errors"
+#~ msgstr "Nya fel"
+
+#~ msgid "There are %d new errors in the log"
+#~ msgstr "Det finns %d nya fel i loggen"
+
+#~ msgid "There is one new error in the log"
+#~ msgstr "Det finns ett nytt fel i loggen"
+
+#~ msgid "Publish"
+#~ msgstr "Publik"
+
+#~ msgid "Notice"
+#~ msgstr "Notifiering"
+
+#~ msgid "The information was trashed"
+#~ msgstr "Informationen är lagd i papperskorgen"
+
+#~ msgid "The information was restored"
+#~ msgstr "Informationen återställdes"
+
+#~ msgid "The information was deleted"
+#~ msgstr "Informationen togs bort"
+
+#~ msgid "The information is being ignored from now on"
+#~ msgstr "Informationen ignoreras from. nu"
+
+#~ msgid "I could only delete %d within %d seconds"
+#~ msgstr "Jag kunde endast radera %s inom %d sekunder"
+
+#~ msgid "I deleted them all for you"
+#~ msgstr "Jag tog bort allihop åt dig"
+
+#~ msgid "All"
+#~ msgstr "Alla"
+
+#~ msgid "Ignore"
+#~ msgstr "Ignorera"
+
+#~ msgid "Trash"
+#~ msgstr "Papperskorg"
+
+#~ msgid "Name"
+#~ msgstr "Namn"
+
+#~ msgid "Amount"
+#~ msgstr "Antal"
+
+#~ msgid "Restore"
+#~ msgstr "Återställ"
+
+#~ msgid "Permanently Delete"
+#~ msgstr "Radera permanent"
+
+#~ msgid "Deprecated"
+#~ msgstr "Gammalt"
+
+#~ msgid "Warning"
+#~ msgstr "Varning"
+
+#~ msgid "Fatal Error"
+#~ msgstr "Kritiskt fel"
+
+#~ msgid "Git Error"
+#~ msgstr "Git-fel"
+
+#~ msgid "Delete All"
+#~ msgstr "Radera alla"

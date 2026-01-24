@@ -1,0 +1,32 @@
+.widget.ai .textarea_with_button
+{
+	position: relative;
+	width: 100%;
+}
+
+	.widget.ai .textarea_with_button textarea
+	{
+		margin: 0;
+		overflow: hidden;
+		padding-right: 4rem;
+		resize: none;
+	}
+
+	.widget.ai .textarea_with_button button
+	{
+		position: absolute;
+		right: .5rem;
+		bottom: .5rem;
+		background: #666;
+		border: none;
+		color: #fff;
+		cursor: pointer;
+		padding: .5rem;
+		border-radius: 50%;
+		display: flex;
+	}
+
+		.widget.ai .textarea_with_button button.is_logged_in
+		{
+			background: #007bff;
+		}
