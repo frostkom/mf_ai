@@ -153,6 +153,21 @@ class mf_ai
 			.show_button(array('type' => 'button', 'name' => 'btnAIRun', 'text' => __("Run", 'lang_ai'), 'class' => 'button-secondary'));
 		}
 
+	function get_vendor_api_key()
+	{
+		$api_key = $api_vendor = "";
+
+		$setting_ai_mistral_api_key = get_option('setting_ai_mistral_api_key');
+
+		if($setting_ai_mistral_api_key != '')
+		{
+			$api_key = $setting_ai_mistral_api_key;
+			$api_vendor = 'mistral';
+		}
+
+		return array($api_key, $api_vendor);
+	}
+
 	function meta_excerpt()
 	{
 		global $post;
@@ -163,21 +178,31 @@ class mf_ai
 
 		if($post_id > 0)
 		{
-			$plugin_include_url = plugin_dir_url(__FILE__);
+			list($api_key, $api_vendor) = $this->get_vendor_api_key();
 
-			mf_enqueue_script('script_ai_page', $plugin_include_url."script_page.js", array(
-				'ajax_url' => admin_url('admin-ajax.php'),
-				'loading_animation' => apply_filters('get_loading_animation', ''),
-			));
+			if($api_key != '')
+			{
+				$plugin_include_url = plugin_dir_url(__FILE__);
 
-			$out .= "<div".apply_filters('get_form_attr', "", ['class' => ["mf_ai_page_form"]]).">
-				<p>".__("I can help you create content for this page. By clicking the button below I will give you suggestions from the information you have already entered as title, content etc. Then you can decide if you want to use my suggestion.", 'lang_ai')."</p>"
-				."<div".get_form_button_classes().">"
-					.show_button(array('type' => 'button', 'text' => __("Get Suggestion Now", 'lang_ai')))
-					.input_hidden(array('name' => 'action', 'value' => 'api_ai_suggestion'))
-					.input_hidden(array('name' => 'post_id', 'value' => $post_id))
-				."</div>"
-			."</div>";
+				mf_enqueue_script('script_ai_page', $plugin_include_url."script_page.js", array(
+					'ajax_url' => admin_url('admin-ajax.php'),
+					'loading_animation' => apply_filters('get_loading_animation', ''),
+				));
+
+				$out .= "<div".apply_filters('get_form_attr', "", ['class' => ["mf_ai_page_form"]]).">
+					<p>".__("I can help you create content for this page. By clicking the button below I will give you suggestions from the information you have already entered as title, content etc. Then you can decide if you want to use my suggestion.", 'lang_ai')."</p>"
+					."<div".get_form_button_classes().">"
+						.show_button(array('type' => 'button', 'text' => __("Get Suggestion Now", 'lang_ai')))
+						.input_hidden(array('name' => 'action', 'value' => 'api_ai_suggestion'))
+						.input_hidden(array('name' => 'post_id', 'value' => $post_id))
+					."</div>"
+				."</div>";
+			}
+
+			else
+			{
+				$out .= sprintf(__("There were no API keys. Go to %sSettings%s to save your API key.", 'lang_api'), "<a href='". admin_url("options-general.php?page=settings_mf_base#settings_ai")."'>", "</a>");
+			}
 		}
 
 		return $out;
@@ -223,15 +248,7 @@ class mf_ai
 	{
 		global $done_text, $error_text;
 
-		$api_key = $api_vendor = "";
-
-		$setting_ai_mistral_api_key = get_option('setting_ai_mistral_api_key');
-
-		if($setting_ai_mistral_api_key != '')
-		{
-			$api_key = $setting_ai_mistral_api_key;
-			$api_vendor = 'mistral';
-		}
+		list($api_key, $api_vendor) = $this->get_vendor_api_key();
 
 		if($api_key != '')
 		{
