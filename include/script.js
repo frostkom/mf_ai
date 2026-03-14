@@ -8,29 +8,6 @@ textarea.addEventListener('input', function()
 
 jQuery(function($)
 {
-	$.ajax(
-	{
-		url: script_ai.ajax_url,
-		type: 'post',
-		dataType: 'json',
-		data:
-		{
-			action: 'api_ai_init'
-		},
-		success: function(data)
-		{
-			if(data.success)
-			{
-				$("button[name='btnAIRun']:not(.is_disabled)").addClass('is_logged_in');
-			}
-
-			else
-			{
-				$("button[name='btnAIRun']:not(.is_disabled)").removeClass('is_logged_in');
-			}
-		}
-	});
-
 	function write_text(dom_target, text, index)
 	{
 		if(index == 0)
@@ -75,8 +52,50 @@ jQuery(function($)
 		else
 		{
 			dom_target.html(text).removeClass("heading");
+
+			if(dom_target.hasClass('heading'))
+			{
+				dom_target.removeClass('heading');
+			}
+
+			if(dom_target.hasClass('loading'))
+			{
+				dom_target.removeClass('loading');
+			}
 		}
 	}
+
+	$.ajax(
+	{
+		url: script_ai.ajax_url,
+		type: 'post',
+		dataType: 'json',
+		data:
+		{
+			action: 'api_ai_init'
+		},
+		success: function(data)
+		{
+			if(data.success)
+			{
+				$("button[name='btnAIRun']:not(.is_disabled)").addClass('is_logged_in');
+
+				$(".api_ai_run").append("<h2 class='heading'></h2><p class='loading'></p>");
+
+				write_text($(".api_ai_run .heading"), data.heading, 0);
+
+				setTimeout(function()
+				{
+					write_text($(".api_ai_run .loading"), data.content, 0);
+				}, 2000);
+			}
+
+			else
+			{
+				$("button[name='btnAIRun']:not(.is_disabled)").removeClass('is_logged_in');
+			}
+		}
+	});
 
 	$(document).on('click', "button[name='btnAIRun']:not(.is_disabled)", function(e)
 	{

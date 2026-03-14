@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-24 12:57+0100\n"
+"POT-Creation-Date: 2026-03-11 21:30+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Fors\n"
 "Language-Team: \n"
@@ -16,73 +16,87 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../include/classes.php:27
-#: ../include/classes.php:155
+#: ../include/classes.php:152
 msgid "Ask me anything"
 msgstr "Fråga mig vad som helst"
 
-#: ../include/classes.php:49
-#: ../include/classes.php:128
+#: ../include/classes.php:46
+#: ../include/classes.php:125
 msgid "AI"
 msgstr ""
 
-#: ../include/classes.php:50
+#: ../include/classes.php:47
 msgid "Display AI"
 msgstr "Visa AI"
 
-#: ../include/classes.php:60
-#: ../include/classes.php:62
+#: ../include/classes.php:57
+#: ../include/classes.php:59
 msgid "AI Queries"
 msgstr "AI-frågor"
 
-#: ../include/classes.php:61
+#: ../include/classes.php:58
 msgid "AI Query"
 msgstr "AI-fråga"
 
-#: ../include/classes.php:63
+#: ../include/classes.php:60
 msgid "List"
 msgstr "Lista"
 
-#: ../include/classes.php:64
+#: ../include/classes.php:61
 msgid "Edit"
 msgstr "Redigera"
 
-#: ../include/classes.php:65
+#: ../include/classes.php:62
 msgid "View"
 msgstr "Visa"
 
-#: ../include/classes.php:66
+#: ../include/classes.php:63
 msgid "Add New"
 msgstr "Lägg till ny"
 
-#: ../include/classes.php:93
+#: ../include/classes.php:90
 msgid "API Key"
 msgstr "API-nyckel"
 
-#: ../include/classes.php:156
+#: ../include/classes.php:153
 msgid "Run"
 msgstr "Kör"
 
-#: ../include/classes.php:177
+#: ../include/classes.php:193
 msgid "I can help you create content for this page. By clicking the button below I will give you suggestions from the information you have already entered as title, content etc. Then you can decide if you want to use my suggestion."
 msgstr "Jag kan hjälpa dig att skapa innehåll till den här sidan. Genom att klicka på knappen nedan ger jag dig förslag utifrån den information du redan har angett, så som titel, innehåll osv. Sen kan du bestämma om du vill använda mitt förslag."
 
-#: ../include/classes.php:179
+#: ../include/classes.php:195
 msgid "Get Suggestion Now"
 msgstr "Hämta förslag nu"
 
-#: ../include/classes.php:193
+#: ../include/classes.php:204
+#, php-format
+msgid "There were no API keys. Go to %sSettings%s to save your API key."
+msgstr "Det finns inga API-nycklar. Gå till %sInställningar%s för att spara din API-nyckel."
+
+#: ../include/classes.php:215
 msgid "Get AI Help"
 msgstr "Ta hjälp av AI"
 
-#: ../include/classes.php:402
+#: ../include/classes.php:242
+#, php-format
+msgid "Hello %s"
+msgstr "Hej %s"
+
+#: ../include/classes.php:243
+msgid "What can I do for you today?"
+msgstr "Vad kan jag hjälpa dig med idag?"
+
+#: ../include/classes.php:420
 msgid "There were no API keys"
 msgstr "Det finns inga API-nycklar"
 
-#: ../include/classes.php:424
+#: ../include/classes.php:442
 msgid "Log in to display this"
 msgstr "Logga in för att visa detta"
 
-#: ../include/classes.php:453
+#: ../include/classes.php:471
 #, php-format
 msgid "Can you give me examples for page title, excerpt and content? The page currently have the title '%s', excerpt '%s' and content '%s'."
 msgstr "Kan du ge mig exempel på sidtitel, utdrag och innehåll? Sidan har för närvarande titeln '%s', utdraget '%s' och innehållet '%s'."

@@ -236,7 +236,11 @@ class mf_ai
 
 		if(is_user_logged_in())
 		{
+			$user_data = get_userdata(get_current_user_id());
+
 			$json_output['success'] = true;
+			$json_output['heading'] = sprintf(__("Hello %s", 'lang_ai'), $user_data->first_name);
+			$json_output['content'] = __("What can I do for you today?", 'lang_ai');
 		}
 
 		header('Content-Type: application/json');
