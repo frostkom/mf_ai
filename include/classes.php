@@ -133,13 +133,12 @@ class mf_ai
 			$obj_encryption = new mf_encryption(__CLASS__);
 			$option = $obj_encryption->decrypt($option, md5(AUTH_KEY));
 
-			echo show_password_field(array('name' => $setting_key, 'value' => $option, 'xtra' => " autocomplete='new-password'"));
+			echo show_password_field(array('name' => $setting_key, 'value' => $option, 'xtra' => " autocomplete='new-password'", 'description' => "<a href='https://console.mistral.ai/home'>".__("Get your Mistral API Key", 'lang_ai')."</a>"));
 		}
 
 		function setting_ai_run_query_callback()
 		{
 			$setting_key = get_setting_key(__FUNCTION__);
-			//$option = get_option($setting_key);
 
 			$plugin_include_url = plugin_dir_url(__FILE__);
 
@@ -149,7 +148,7 @@ class mf_ai
 			));
 
 			echo "<p class='api_ai_run'></p>"
-			.show_textarea(array('name' => $setting_key, 'placeholder' => __("Ask me anything", 'lang_ai'))) //, 'value' => $option
+			.show_textarea(array('name' => $setting_key, 'placeholder' => __("Ask me anything", 'lang_ai')))
 			.show_button(array('type' => 'button', 'name' => 'btnAIRun', 'text' => __("Run", 'lang_ai'), 'class' => 'button-secondary'));
 		}
 
@@ -468,7 +467,7 @@ class mf_ai
 				$post_excerpt = $r->post_excerpt;
 				$post_content = $r->post_content;
 
-				$json_output['query'] = sprintf(__("Can you give me examples for page title, excerpt and content? The page currently have the title '%s', excerpt '%s' and content '%s'.", 'lang_ai'), $post_title, $post_excerpt, $post_content);
+				$json_output['query'] = sprintf(__("Can you give me examples for page title and excerpt? The title should be between %d and %d characters. The excerpt should be between %d and %d characters. Can you also give me search word examples that could be useful to incorporate in the title, excerpt or content? The page currently have the title '%s', excerpt '%s' and body text '%s'.", 'lang_ai'), 15, 70, 100, 200, $post_title, $post_excerpt, $post_content);
 
 				$json_output = $this->call_api($json_output);
 			}

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-11 21:30+0100\n"
+"POT-Creation-Date: 2026-05-24 10:43+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Fors\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../include/classes.php:27
-#: ../include/classes.php:152
+#: ../include/classes.php:151
 msgid "Ask me anything"
 msgstr "Fråga mig vad som helst"
 
@@ -58,48 +58,59 @@ msgstr "Lägg till ny"
 msgid "API Key"
 msgstr "API-nyckel"
 
-#: ../include/classes.php:153
+#: ../include/classes.php:136
+msgid "Get your Mistral API Key"
+msgstr "Hämta din API-nyckel för Mistral"
+
+#: ../include/classes.php:152
 msgid "Run"
 msgstr "Kör"
 
-#: ../include/classes.php:193
+#: ../include/classes.php:192
 msgid "I can help you create content for this page. By clicking the button below I will give you suggestions from the information you have already entered as title, content etc. Then you can decide if you want to use my suggestion."
 msgstr "Jag kan hjälpa dig att skapa innehåll till den här sidan. Genom att klicka på knappen nedan ger jag dig förslag utifrån den information du redan har angett, så som titel, innehåll osv. Sen kan du bestämma om du vill använda mitt förslag."
 
-#: ../include/classes.php:195
+#: ../include/classes.php:194
 msgid "Get Suggestion Now"
 msgstr "Hämta förslag nu"
 
-#: ../include/classes.php:204
+#: ../include/classes.php:203
 #, php-format
 msgid "There were no API keys. Go to %sSettings%s to save your API key."
 msgstr "Det finns inga API-nycklar. Gå till %sInställningar%s för att spara din API-nyckel."
 
-#: ../include/classes.php:215
+#: ../include/classes.php:214
 msgid "Get AI Help"
 msgstr "Ta hjälp av AI"
 
-#: ../include/classes.php:242
+#: ../include/classes.php:241
 #, php-format
 msgid "Hello %s"
 msgstr "Hej %s"
 
-#: ../include/classes.php:243
+#: ../include/classes.php:242
 msgid "What can I do for you today?"
 msgstr "Vad kan jag hjälpa dig med idag?"
 
-#: ../include/classes.php:420
+#: ../include/classes.php:419
 msgid "There were no API keys"
 msgstr "Det finns inga API-nycklar"
 
-#: ../include/classes.php:442
+#: ../include/classes.php:441
 msgid "Log in to display this"
 msgstr "Logga in för att visa detta"
 
-#: ../include/classes.php:471
+#: ../include/classes.php:470
 #, php-format
-msgid "Can you give me examples for page title, excerpt and content? The page currently have the title '%s', excerpt '%s' and content '%s'."
-msgstr "Kan du ge mig exempel på sidtitel, utdrag och innehåll? Sidan har för närvarande titeln '%s', utdraget '%s' och innehållet '%s'."
+msgid "Can you give me examples for page title and excerpt? The title should be between %d and %d characters. The excerpt should be between %d and %d characters. Can you also give me search word examples that could be useful to incorporate in the title, excerpt or content? The page currently have the title '%s', excerpt '%s' and body text '%s'."
+msgstr "Kan du ge mig exempel på sidans rubrik och utdrag? Rubriken bör ha mellan %d och %d tecken. Utdraget bör ha mellan %d och %d tecken. Kan du också ge mig exempel på sökord som kan vara användbara till rubrik, utdrag eller textinnehåll? Sidan har nu rubriken '%s', utdraget '%s' och brödtexten '%s'."
+
+#~ msgid ""
+#~ "Can you give me examples for page title, excerpt and content? The page "
+#~ "currently have the title '%s', excerpt '%s' and content '%s'."
+#~ msgstr ""
+#~ "Kan du ge mig exempel på sidtitel, utdrag och innehåll? Sidan har för "
+#~ "närvarande titeln '%s', utdraget '%s' och innehållet '%s'."
 
 #~ msgid "now"
 #~ msgstr "nu"
