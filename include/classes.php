@@ -457,7 +457,7 @@ class mf_ai
 
 		$post_id = check_var('post_id', 'int');
 
-		$result = $wpdb->get_results($wpdb->prepare("SELECT post_title, post_excerpt, post_content FROM ".$wpdb->posts." WHERE ID = '%d'", $post_id));
+		$result = $wpdb->get_results($wpdb->prepare("SELECT post_title, post_excerpt, post_content FROM ".$wpdb->posts." WHERE ID = '%d' AND (post_excerpt != '' OR post_content != '')", $post_id));
 
 		if($wpdb->num_rows > 0)
 		{
@@ -467,13 +467,16 @@ class mf_ai
 				$post_excerpt = $r->post_excerpt;
 				$post_content = $r->post_content;
 
-				$json_output['query'] = sprintf(__("Can you give me examples for page title and excerpt? The title should be between %d and %d characters. The excerpt should be between %d and %d characters. Can you also give me search word examples that could be useful to incorporate in the title, excerpt or content? The page currently have the title '%s', excerpt '%s' and body text '%s'.", 'lang_ai'), 15, 70, 100, 200, $post_title, $post_excerpt, $post_content);
+				$json_output['query'] = sprintf(__("Can you give me examples for page title and excerpt? The title should be between %d and %d characters including all characters and spaces. The excerpt should be between %d and %d characters including all characters and spaces. Can you also give me search word examples that could be useful to incorporate in the title, excerpt or content? The page currently have the title '%s', excerpt '%s' and body text '%s'.", 'lang_ai'), 15, 70, 100, 180, $post_title, $post_excerpt, $post_content);
 
 				$json_output = $this->call_api($json_output);
 			}
 		}
 
-		else{}
+		else
+		{
+			$json_output['html'] = __("The page that you want suggestions for is missing excerpt and content. For me to give you good recommendations there has to be some text content on the page.", 'lang_ai');
+		}
 
 		header('Content-Type: application/json');
 		echo json_encode($json_output);

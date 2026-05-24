@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-24 10:43+0100\n"
+"POT-Creation-Date: 2026-05-24 11:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Fors\n"
 "Language-Team: \n"
@@ -102,8 +102,12 @@ msgstr "Logga in för att visa detta"
 
 #: ../include/classes.php:470
 #, php-format
-msgid "Can you give me examples for page title and excerpt? The title should be between %d and %d characters. The excerpt should be between %d and %d characters. Can you also give me search word examples that could be useful to incorporate in the title, excerpt or content? The page currently have the title '%s', excerpt '%s' and body text '%s'."
-msgstr "Kan du ge mig exempel på sidans rubrik och utdrag? Rubriken bör ha mellan %d och %d tecken. Utdraget bör ha mellan %d och %d tecken. Kan du också ge mig exempel på sökord som kan vara användbara till rubrik, utdrag eller textinnehåll? Sidan har nu rubriken '%s', utdraget '%s' och brödtexten '%s'."
+msgid "Can you give me examples for page title and excerpt? The title should be between %d and %d characters including all characters and spaces. The excerpt should be between %d and %d characters including all characters and spaces. Can you also give me search word examples that could be useful to incorporate in the title, excerpt or content? The page currently have the title '%s', excerpt '%s' and body text '%s'."
+msgstr "Kan du ge mig exempel på sidans rubrik och utdrag? Rubriken bör ha mellan %d och %d tecken inklusive alla tecken och mellanslag. Utdraget bör ha mellan %d och %d tecken inklusive alla tecken och mellanslag. Kan du också ge mig exempel på sökord som kan vara användbara till rubrik, utdrag eller textinnehåll? Sidan har nu rubriken '%s', utdraget '%s' och brödtexten '%s'."
+
+#: ../include/classes.php:478
+msgid "The page that you want suggestions for is missing excerpt and content. For me to give you good recommendations there has to be some text content on the page."
+msgstr "Sidan som du vill ha förslag till saknar utdrag och innehåll. För att jag ska kunna ge dig rekommendationer behöver det finnas någon text på sidan."
 
 #~ msgid ""
 #~ "Can you give me examples for page title, excerpt and content? The page "
