@@ -63,8 +63,8 @@ jQuery(function($)
 			type: 'post',
 			dataType: 'json',
 			data: {
-				action: dom_obj.siblings("input[name='action']").val(),
-				post_id: dom_obj.siblings("input[name='post_id']").val(),
+				action: dom_obj.siblings("input[name='ai_action']").val(),
+				post_id: dom_obj.siblings("input[name='ai_post_id']").val(),
 			},
 			success: function(data)
 			{

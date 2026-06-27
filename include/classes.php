@@ -182,7 +182,6 @@ class mf_ai
 			if($api_key != '')
 			{
 				$plugin_include_url = plugin_dir_url(__FILE__);
-
 				mf_enqueue_script('script_ai_page', $plugin_include_url."script_page.js", array(
 					'ajax_url' => admin_url('admin-ajax.php'),
 					'loading_animation' => apply_filters('get_loading_animation', ''),
@@ -192,8 +191,8 @@ class mf_ai
 					<p>".__("I can help you create content for this page. By clicking the button below I will give you suggestions from the information you have already entered as title, content etc. Then you can decide if you want to use my suggestion.", 'lang_ai')."</p>"
 					."<div".get_form_button_classes().">"
 						.show_button(array('type' => 'button', 'text' => __("Get Suggestion Now", 'lang_ai')))
-						.input_hidden(array('name' => 'action', 'value' => 'api_ai_suggestion'))
-						.input_hidden(array('name' => 'post_id', 'value' => $post_id))
+						.input_hidden(array('name' => 'ai_action', 'value' => 'api_ai_suggestion'))
+						.input_hidden(array('name' => 'ai_post_id', 'value' => $post_id))
 					."</div>"
 				."</div>";
 			}
