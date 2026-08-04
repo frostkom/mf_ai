@@ -257,26 +257,22 @@ class mf_ai
 			$obj_encryption = new mf_encryption(__CLASS__);
 			$api_key = $obj_encryption->decrypt($api_key, md5(AUTH_KEY));
 
-			$url = 'https://api.mistral.ai/v1/chat/completions';
-
-			$arr_headers = [
-				'Content-Type: application/json',
-				'Authorization: Bearer '.$api_key,
-			];
-
-			$arr_post_data = [
-				'model' => 'mistral-small-latest',
-				'messages' => [
-					['role' => 'user', 'content' => $json_output['query']]
-				]
-			];
-
-			list($content, $headers) = get_url_content(array(
-				'url' => $url,
+			$curl_data = array(
+				'url' => "https://api.mistral.ai/v1/chat/completions",
 				'catch_head' => true,
-				'headers' => $arr_headers,
-				'post_data' => json_encode($arr_post_data),
-			));
+				'headers' => [
+					'Content-Type: application/json',
+					'Authorization: Bearer '.$api_key,
+				],
+				'post_data' => json_encode([
+					'model' => 'mistral-small-latest',
+					'messages' => [
+						['role' => 'user', 'content' => $json_output['query']]
+					]
+				]),
+			);
+
+			list($content, $headers) = get_url_content($curl_data);
 
 			/*$url = "https://api.anthropic.com/v1/messages";
 			$apiKey = "YOUR_API_KEY";
@@ -386,29 +382,49 @@ class mf_ai
 				case 201:
 					$arr_json = json_decode($content, true);
 
-					$json_output['success'] = true;
-					$json_output['html'] = nl2br($arr_json['choices'][0]['message']['content']);
+					if(isset($arr_json['choices'][0]['message']['content']) && $arr_json['choices'][0]['message']['content'] != '')
+					{
+						$json_output['success'] = true;
+						$json_output['html'] = nl2br($arr_json['choices'][0]['message']['content']);
 
-					//{"id":"[id]","object":"chat.completion","created":1747992080,"model":"mistral-small-latest","choices":[{"index":0,"message":{"role":"assistant","tool_calls":null,"content":""},"finish_reason":"stop","logprobs":null}],"usage":{"prompt_tokens":10,"total_tokens":24,"completion_tokens":14}}
+						//{"id":"[id]","object":"chat.completion","created":1747992080,"model":"mistral-small-latest","choices":[{"index":0,"message":{"role":"assistant","tool_calls":null,"content":""},"finish_reason":"stop","logprobs":null}],"usage":{"prompt_tokens":10,"total_tokens":24,"completion_tokens":14}}
 
-					$post_data = array(
-						'post_type' => $this->post_type,
-						'post_title' => $json_output['query'],
-						'post_content' => $arr_json['choices'][0]['message']['content'],
-						'post_status' => 'publish',
-						'meta_input' => apply_filters('filter_meta_input', array(
-							$this->meta_prefix.'api_vendor' => $api_vendor,
-							$this->meta_prefix.'http_code' => $headers['http_code'],
-							$this->meta_prefix.'id' => $arr_json['id'],
-							$this->meta_prefix.'response' => $content,
-						)),
-					);
+						$post_data = array(
+							'post_type' => $this->post_type,
+							'post_title' => $json_output['query'],
+							'post_content' => $arr_json['choices'][0]['message']['content'],
+							'post_status' => 'publish',
+							'meta_input' => apply_filters('filter_meta_input', array(
+								$this->meta_prefix.'api_vendor' => $api_vendor,
+								$this->meta_prefix.'http_code' => $headers['http_code'],
+								$this->meta_prefix.'id' => $arr_json['id'],
+								$this->meta_prefix.'response' => $content,
+							)),
+						);
 
-					wp_insert_post($post_data);
+						wp_insert_post($post_data);
+					}
+
+					else
+					{
+						do_log(__FUNCTION__.":".__LINE__.": ".var_export($curl_data, true)." -> ".var_export($headers, true)." + '".$content."'");
+
+						$json_output['html'] = __("There was an unknown error. An administrator has been notified about this.", 'lang_ai');
+					}
 				break;
 
 				default:
-					$json_output['html'] = $content;
+					if($content != '')
+					{
+						$json_output['html'] = $content;
+					}
+
+					else
+					{
+						do_log(__FUNCTION__.":".__LINE__.": ".var_export($curl_data, true)." -> ".var_export($headers, true)." + '".$content."'");
+
+						$json_output['html'] = __("There was an unknown error. An administrator has been notified about this.", 'lang_ai');
+					}
 				break;
 			}
 		}
