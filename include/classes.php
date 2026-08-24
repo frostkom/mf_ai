@@ -260,6 +260,7 @@ class mf_ai
 			$curl_data = array(
 				'url' => "https://api.mistral.ai/v1/chat/completions",
 				'catch_head' => true,
+				'timeout' => 20,
 				'headers' => [
 					'Content-Type: application/json',
 					'Authorization: Bearer '.$api_key,
@@ -423,7 +424,15 @@ class mf_ai
 					{
 						do_log(__FUNCTION__.":".__LINE__.": ".var_export($curl_data, true)." -> ".var_export($headers, true)." + '".$content."'");
 
-						$json_output['html'] = __("There was an unknown error. An administrator has been notified about this.", 'lang_ai');
+						if(isset($headers['curl_error']))
+						{
+							$json_output['html'] = $headers['curl_error'];
+						}
+
+						else
+						{
+							$json_output['html'] = __("There was an unknown error. An administrator has been notified about this.", 'lang_ai');
+						}
 					}
 				break;
 			}
