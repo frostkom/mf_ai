@@ -3,7 +3,7 @@
 Plugin Name: MF AI
 Plugin URI: https://github.com/frostkom/mf_ai
 Description: Integrate an AI search on your site or get help from AI to craft a titel, exerpt and content for each page
-Version: 1.2.5
+Version: 1.2.6
 Licence: GPLv2 or later
 Author: Martin Fors
 Author URI: https://martinfors.se
@@ -51,7 +51,7 @@ if(!function_exists('is_plugin_active') || function_exists('is_plugin_active') &
 
 		mf_uninstall_plugin(array(
 			'post_types' => array($obj_ai->post_type),
-			'options' => array('setting_ai_mistral_api_key', 'setting_ai_run_query'),
+			'options' => array('setting_ai_mistral_api_key', 'setting_ai_anthropic_api_key', 'setting_ai_open_ai_api_key', 'setting_ai_perplexity_api_key', 'setting_ai_run_query'),
 		));
 	}
 }

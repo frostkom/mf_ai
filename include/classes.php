@@ -87,9 +87,12 @@ class mf_ai
 
 		$arr_settings = [];
 
-		$arr_settings['setting_ai_mistral_api_key'] = __("API Key", 'lang_ai');
+		$arr_settings['setting_ai_mistral_api_key'] = __("API Key", 'lang_ai')." (Mistral)";
+		$arr_settings['setting_ai_open_ai_api_key'] = __("API Key", 'lang_ai')." (Open AI)";
+		$arr_settings['setting_ai_anthropic_api_key'] = __("API Key", 'lang_ai')." (Anthropic)";
+		$arr_settings['setting_ai_perplexity_api_key'] = __("API Key", 'lang_ai')." (Perplexity)";
 
-		if(get_option('setting_ai_mistral_api_key') != '')
+		if(get_option('setting_ai_mistral_api_key') != '' || get_option('setting_ai_open_ai_api_key') != '' || get_option('setting_ai_anthropic_api_key') != '' || get_option('setting_ai_perplexity_api_key') != '')
 		{
 			$arr_settings['setting_ai_run_query'] = __("", 'lang_ai');
 		}
@@ -109,6 +112,9 @@ class mf_ai
 			switch($option_key)
 			{
 				case 'setting_ai_mistral_api_key':
+				case 'setting_ai_anthropic_api_key':
+				case 'setting_ai_open_ai_api_key':
+				case 'setting_ai_perplexity_api_key':
 					$obj_encryption = new mf_encryption(__CLASS__);
 					$new_value = $obj_encryption->encrypt($new_value, md5(AUTH_KEY));
 				break;
@@ -133,7 +139,40 @@ class mf_ai
 			$obj_encryption = new mf_encryption(__CLASS__);
 			$option = $obj_encryption->decrypt($option, md5(AUTH_KEY));
 
-			echo show_password_field(array('name' => $setting_key, 'value' => $option, 'xtra' => " autocomplete='new-password'", 'description' => "<a href='https://console.mistral.ai/home'>".__("Get your Mistral API Key", 'lang_ai')."</a>"));
+			echo show_password_field(array('name' => $setting_key, 'value' => $option, 'xtra' => " autocomplete='new-password'", 'description' => "<a href='https://console.mistral.ai/home'>".__("Get your API Key", 'lang_ai')."</a>"));
+		}
+
+		function setting_ai_anthropic_api_key_callback()
+		{
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key);
+
+			$obj_encryption = new mf_encryption(__CLASS__);
+			$option = $obj_encryption->decrypt($option, md5(AUTH_KEY));
+
+			echo show_password_field(array('name' => $setting_key, 'value' => $option, 'xtra' => " autocomplete='new-password'", 'description' => "<a href='https://console.anthropic.com/settings/keys'>".__("Get your API Key", 'lang_ai')."</a>"));
+		}
+
+		function setting_ai_perplexity_api_key_callback()
+		{
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key);
+
+			$obj_encryption = new mf_encryption(__CLASS__);
+			$option = $obj_encryption->decrypt($option, md5(AUTH_KEY));
+
+			echo show_password_field(array('name' => $setting_key, 'value' => $option, 'xtra' => " autocomplete='new-password'", 'description' => "<a href='https://www.perplexity.ai/settings/api'>".__("Get your API Key", 'lang_ai')."</a>"));
+		}
+
+		function setting_ai_open_ai_api_key_callback()
+		{
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key);
+
+			$obj_encryption = new mf_encryption(__CLASS__);
+			$option = $obj_encryption->decrypt($option, md5(AUTH_KEY));
+
+			echo show_password_field(array('name' => $setting_key, 'value' => $option, 'xtra' => " autocomplete='new-password'", 'description' => "<a href='https://platform.openai.com/api-keys'>".__("Get your API Key", 'lang_ai')."</a>"));
 		}
 
 		function setting_ai_run_query_callback()
@@ -156,12 +195,22 @@ class mf_ai
 	{
 		$api_key = $api_vendor = "";
 
-		$setting_ai_mistral_api_key = get_option('setting_ai_mistral_api_key');
+		$arr_services = ['mistral', 'anthropic', 'open_ai', 'perplexity'];
 
-		if($setting_ai_mistral_api_key != '')
+		foreach($arr_services as $str_service)
 		{
-			$api_key = $setting_ai_mistral_api_key;
-			$api_vendor = 'mistral';
+			if($api_vendor == '')
+			{
+				$api_key = get_option('setting_ai_'.$str_service.'_api_key');
+
+				if($api_key != '')
+				{
+					$obj_encryption = new mf_encryption(__CLASS__);
+					$api_key = $obj_encryption->decrypt($api_key, md5(AUTH_KEY));
+
+					$api_vendor = $str_service;
+				}
+			}
 		}
 
 		return array($api_key, $api_vendor);
@@ -246,7 +295,7 @@ class mf_ai
 		die();
 	}
 
-	function call_api($json_output)
+	/*function call_api($json_output)
 	{
 		global $done_text, $error_text;
 
@@ -274,108 +323,6 @@ class mf_ai
 			);
 
 			list($content, $headers) = get_url_content($curl_data);
-
-			/*$url = "https://api.anthropic.com/v1/messages";
-			$apiKey = "YOUR_API_KEY";
-
-			$headers = [
-				"x-api-key: $apiKey",
-				"content-type: application/json",
-				"anthropic-version: 2023-06-01"
-			];
-
-			$data = [
-				"model" => "claude-3-opus-20240229", // Or another available Claude model
-				"max_tokens" => 256,
-				"messages" => [
-					[
-						"role" => "user",
-						"content" => "Explain the difference between PHP and Python."
-					]
-				]
-			];
-
-			$ch = curl_init($url);
-			curl_setopt($ch, CURLOPT_POST, true);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-			$response = curl_exec($ch);
-
-			echo $response;
-
-			#####################
-
-			$url = "https://api.openai.com/v1/chat/completions";
-			$apiKey = "YOUR_OPENAI_API_KEY";
-
-			$headers = [
-				"Authorization: Bearer $apiKey",
-				"Content-Type: application/json"
-			];
-
-			$data = [
-				"model" => "gpt-3.5-turbo", // Or another available ChatGPT model
-				"messages" => [
-					[
-						"role" => "user",
-						"content" => "Explain the difference between PHP and Python."
-					]
-				],
-				"max_tokens" => 256
-			];
-
-			$ch = curl_init($url);
-			curl_setopt($ch, CURLOPT_POST, true);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-			$response = curl_exec($ch);
-
-			// Decode and print the assistant's reply
-			$arr_json = json_decode($response, true);
-			echo $arr_json['choices'][0]['message']['content'];
-
-			##################################
-
-			$url = "https://api.perplexity.ai/chat/completions";
-			$apiKey = "YOUR_API_KEY";
-
-			$headers = [
-				"Authorization: Bearer $apiKey",
-				"Content-Type: application/json",
-				"Accept: application/json"
-			];
-
-			$data = [
-				"model" => "mistral-7b-instruct", // Or try "llama-13b-chat", "codellama-34b-instruct", etc.
-				"stream" => false,
-				"max_tokens" => 256,
-				"messages" => [
-					[
-						"role" => "system",
-						"content" => "Be precise and concise in your responses."
-					],
-					[
-						"role" => "user",
-						"content" => "How many stars are there in our galaxy?"
-					]
-				]
-			];
-
-			$ch = curl_init($url);
-			curl_setopt($ch, CURLOPT_POST, true);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-			$response = curl_exec($ch);
-
-			// Decode and print the model's reply
-			$arr_json = json_decode($response, true);
-			echo $arr_json['choices'][0]['message']['content'];*/
 
 			switch($headers['http_code'])
 			{
@@ -429,6 +376,189 @@ class mf_ai
 							$json_output['html'] = $headers['curl_error'];
 						}
 
+						else
+						{
+							$json_output['html'] = __("There was an unknown error. An administrator has been notified about this.", 'lang_ai');
+						}
+					}
+				break;
+			}
+		}
+
+		else
+		{
+			$json_output['html'] = __("There were no API keys", 'lang_api');
+		}
+
+		return $json_output;
+	}*/
+
+	function call_api($json_output)
+	{
+		global $done_text, $error_text;
+
+		list($api_key, $api_vendor) = $this->get_vendor_api_key();
+
+		if($api_key != '')
+		{
+			$query = $json_output['query'];
+			$json_output['vendor'] = $api_vendor;
+
+			switch ($api_vendor)
+			{
+				case 'anthropic':
+					$curl_data = array(
+						'url' => "https://api.anthropic.com/v1/messages",
+						'catch_head' => true,
+						'timeout' => 20,
+						'headers' => [
+							'Content-Type: application/json',
+							'x-api-key: '.$api_key,
+							'anthropic-version: 2023-06-01',
+						],
+						'post_data' => json_encode([
+							'model' => 'claude-sonnet-4-6', // update to whichever Claude model you want
+							'max_tokens' => 1024,
+							'messages' => [
+								['role' => 'user', 'content' => $query],
+							],
+						]),
+					);
+				break;
+
+				case 'open_ai':
+					$curl_data = array(
+						'url' => "https://api.openai.com/v1/chat/completions",
+						'catch_head' => true,
+						'timeout' => 20,
+						'headers' => [
+							'Content-Type: application/json',
+							'Authorization: Bearer '.$api_key,
+						],
+						'post_data' => json_encode([
+							'model' => 'gpt-4o-mini',
+							'max_tokens' => 256, // back to max_tokens for this model
+							'messages' => [
+								['role' => 'user', 'content' => $query],
+							],
+						]),
+					);
+				break;
+
+				case 'perplexity':
+					$curl_data = array(
+						'url' => "https://api.perplexity.ai/chat/completions",
+						'catch_head' => true,
+						'timeout' => 20,
+						'headers' => [
+							'Content-Type: application/json',
+							'Accept: application/json',
+							'Authorization: Bearer '.$api_key,
+						],
+						'post_data' => json_encode([
+							'model' => 'sonar', // update to whichever Perplexity model you want
+							'stream' => false,
+							'max_tokens' => 256,
+							'messages' => [
+								['role' => 'system', 'content' => 'Be precise and concise in your responses.'],
+								['role' => 'user', 'content' => $query],
+							],
+						]),
+					);
+				break;
+
+				case 'mistral':
+				default:
+					$curl_data = array(
+						'url' => "https://api.mistral.ai/v1/chat/completions",
+						'catch_head' => true,
+						'timeout' => 20,
+						'headers' => [
+							'Content-Type: application/json',
+							'Authorization: Bearer '.$api_key,
+						],
+						'post_data' => json_encode([
+							'model' => 'mistral-small-latest',
+							'messages' => [
+								['role' => 'user', 'content' => $query],
+							],
+						]),
+					);
+				break;
+			}
+
+			list($content, $headers) = get_url_content($curl_data);
+
+			switch ($headers['http_code'])
+			{
+				case 200:
+				case 201:
+					$arr_json = json_decode($content, true);
+					// ---- Extract the reply text per vendor ------------------------
+					$reply_text = '';
+					$response_id = '';
+
+					if ($api_vendor === 'anthropic')
+					{
+						// Anthropic shape: {"id":"...","content":[{"type":"text","text":"..."}], ...}
+						if (isset($arr_json['content'][0]['text']))
+						{
+							$reply_text = $arr_json['content'][0]['text'];
+						}
+						$response_id = isset($arr_json['id']) ? $arr_json['id'] : '';
+					}
+					else
+					{
+						// OpenAI-compatible shape (OpenAI, Mistral, Perplexity):
+						// {"id":"...","choices":[{"message":{"content":"..."}}]}
+						if (isset($arr_json['choices'][0]['message']['content']))
+						{
+							$reply_text = $arr_json['choices'][0]['message']['content'];
+						}
+						$response_id = isset($arr_json['id']) ? $arr_json['id'] : '';
+					}
+
+					if ($reply_text != '')
+					{
+						$json_output['success'] = true;
+						$json_output['html'] = nl2br($reply_text);
+
+						$post_data = array(
+							'post_type' => $this->post_type,
+							'post_title' => $query,
+							'post_content' => $reply_text,
+							'post_status' => 'publish',
+							'meta_input' => apply_filters('filter_meta_input', array(
+								$this->meta_prefix.'api_vendor' => $api_vendor,
+								$this->meta_prefix.'http_code' => $headers['http_code'],
+								$this->meta_prefix.'id' => $response_id,
+								$this->meta_prefix.'response' => $content,
+							)),
+						);
+
+						wp_insert_post($post_data);
+					}
+					else
+					{
+						do_log(__FUNCTION__.":".__LINE__.": ".var_export($curl_data, true)." -> ".var_export($headers, true)." + '".$content."'");
+
+						$json_output['html'] = __("There was an unknown error. An administrator has been notified about this.", 'lang_ai');
+					}
+				break;
+
+				default:
+					if ($content != '')
+					{
+						$json_output['html'] = $content;
+					}
+					else
+					{
+						do_log(__FUNCTION__.":".__LINE__.": ".var_export($curl_data, true)." -> ".var_export($headers, true)." + '".$content."'");
+
+						if (isset($headers['curl_error']))
+						{
+							$json_output['html'] = $headers['curl_error'];
+						}
 						else
 						{
 							$json_output['html'] = __("There was an unknown error. An administrator has been notified about this.", 'lang_ai');
