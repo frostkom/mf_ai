@@ -489,7 +489,7 @@ class mf_ai
 
 			list($content, $headers) = get_url_content($curl_data);
 
-			switch ($headers['http_code'])
+			switch($headers['http_code'])
 			{
 				case 200:
 				case 201:
@@ -498,27 +498,30 @@ class mf_ai
 					$reply_text = '';
 					$response_id = '';
 
-					if ($api_vendor === 'anthropic')
+					if($api_vendor === 'anthropic')
 					{
 						// Anthropic shape: {"id":"...","content":[{"type":"text","text":"..."}], ...}
-						if (isset($arr_json['content'][0]['text']))
+						if(isset($arr_json['content'][0]['text']))
 						{
 							$reply_text = $arr_json['content'][0]['text'];
 						}
+
 						$response_id = isset($arr_json['id']) ? $arr_json['id'] : '';
 					}
+
 					else
 					{
 						// OpenAI-compatible shape (OpenAI, Mistral, Perplexity):
 						// {"id":"...","choices":[{"message":{"content":"..."}}]}
-						if (isset($arr_json['choices'][0]['message']['content']))
+						if(isset($arr_json['choices'][0]['message']['content']))
 						{
 							$reply_text = $arr_json['choices'][0]['message']['content'];
 						}
+
 						$response_id = isset($arr_json['id']) ? $arr_json['id'] : '';
 					}
 
-					if ($reply_text != '')
+					if($reply_text != '')
 					{
 						$json_output['success'] = true;
 						$json_output['html'] = nl2br($reply_text);
@@ -547,7 +550,7 @@ class mf_ai
 				break;
 
 				default:
-					if ($content != '')
+					if($content != '')
 					{
 						$json_output['html'] = $content;
 					}
@@ -555,7 +558,7 @@ class mf_ai
 					{
 						do_log(__FUNCTION__.":".__LINE__.": ".var_export($curl_data, true)." -> ".var_export($headers, true)." + '".$content."'");
 
-						if (isset($headers['curl_error']))
+						if(isset($headers['curl_error']))
 						{
 							$json_output['html'] = $headers['curl_error'];
 						}

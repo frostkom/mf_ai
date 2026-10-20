@@ -1,8 +1,7 @@
 (function()
 {
 	var el = wp.element.createElement,
-		registerBlockType = wp.blocks.registerBlockType,
-		InspectorControls = wp.blockEditor.InspectorControls;
+		registerBlockType = wp.blocks.registerBlockType;
 
 	registerBlockType('mf/ai',
 	{
